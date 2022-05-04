@@ -35,7 +35,15 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/user',(req,res)=>{
+ if(req.query.name){
+    
+    const search=req.query.name.toLocaleLowerCase();
+    const match=users.filter(user=>user.name.toLocaleLowerCase().includes(search));
+    res.send(match)
+ }
+   else{
     res.send(users)
+   }
 })
 app.post('/user',(req,res)=>{
     console.log(req.body);
